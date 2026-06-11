@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "amplifish"
+version = "0.1.0"
+description = "FISH image analysis for oncogene amplification typing (ecDNA vs HSR)"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [
+    { name = "Akdemir Lab" },
+]
+keywords = ["FISH", "ecDNA", "HSR", "oncogene amplification", "microscopy", "image analysis"]
+dependencies = [
+    "numpy>=1.22",
+    "pandas>=1.4",
+    "scikit-image>=0.19",
+    "scipy>=1.8",
+    "matplotlib>=3.5",
+    # Nucleus segmentation backend (CellposeSAM, which pulls in torch) plus the
+    # image helpers it and the measurement code rely on. Required for the full
+    # pipeline and the demo.
+    "cellpose>=4.0",
+    "csbdeep",
+    "opencv-python>=4.5",
+    # KMeans clustering for the demo's feature-separation figure.
+    "scikit-learn>=1.0",
+]
+
+[project.optional-dependencies]
+# Test suite.
+dev = ["pytest>=7"]
+
+[project.urls]
+Homepage = "https://github.com/akdemirlab/AMPLIFISH"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
